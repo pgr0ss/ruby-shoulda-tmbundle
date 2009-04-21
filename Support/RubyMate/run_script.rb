@@ -55,8 +55,12 @@ class RubyMate < ScriptMate
           elsif line =~ /([\w\_]+).*\[([\w\_\/\.]+)\:(\d+)\]/
             method, file, line = $1, $2, $3
             "<span><a style=\"color: blue;\" href=\"txmt://open?url=file://#{e_url(file)}&amp;line=#{line}\">#{method}</span>:#{line}<br/>"
-          elsif line =~ /^\d+ tests, \d+ assertions, (\d+) failures, (\d+) errors/
-            "<span style=\"color: #{$1 + $2 == "00" ? "green" : "red"}\">#{$&}</span><br/>"
+          elsif line =~ /^(\d+) tests, \d+ assertions, (\d+) failures, (\d+) errors/
+            if $1 == "0"
+              "#{$&}<br/>No tests ran. Maybe you messed up indenting? Our shoulda ruby parsing is pretty primitive. The 'context' line should be indented less than the 'should' line."
+            else
+              "<span style=\"color: #{$2 + $3 == "00" ? "green" : "red"}\">#{$&}</span><br/>"
+            end
           else
             htmlize(line)
           end

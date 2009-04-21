@@ -39,7 +39,7 @@ if [[ -z "$args" ]]; then
   fi
 
   export RUBYLIB="$TM_BUNDLE_SUPPORT/RubyMate${RUBYLIB:+:$RUBYLIB}"
-  "${TM_RUBY:-ruby}" -- "$TM_BUNDLE_SUPPORT/RubyMate/run_script.rb" $args</string>
+  "${TM_RUBY:-ruby}" -C$TM_PROJECT_DIRECTORY -- "$TM_BUNDLE_SUPPORT/RubyMate/run_script.rb" $args</string>
 	<key>fallbackInput</key>
 	<string>scope</string>
 	<key>input</key>
